@@ -1,0 +1,9 @@
+SOFTSERIAL 1 TX changed from PWM 6 to PWM 5
+cleanflight root\src\main\target\NAZE\target.h
+//#define SOFTSERIAL_1_TIMER_RX_HARDWARE 4 // PWM 5
+
+//#define SOFTSERIAL_1_TIMER_TX_HARDWARE 5 // PWM 6
+
+#define SOFTSERIAL_1_TIMER_RX_HARDWARE 5 // PWM 6
+
+#define SOFTSERIAL_1_TIMER_TX_HARDWARE 4 // PWM 5
