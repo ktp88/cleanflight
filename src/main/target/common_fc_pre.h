@@ -135,8 +135,6 @@
 #define USE_SERIALRX_SUMH       // Graupner legacy protocol
 #define USE_SERIALRX_XBUS       // JR
 
-
-
 #if (FLASH_SIZE > 64)
 #define MAX_PROFILE_COUNT 3
 #else
