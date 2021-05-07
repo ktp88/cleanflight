@@ -37,7 +37,6 @@
 #include "drivers/timer.h"
 #include "drivers/serial.h"
 
-
 #include "sensors/sensors.h"
 #include "sensors/acceleration.h"
 #include "sensors/gyro.h"
@@ -120,6 +119,12 @@ extern int16_t telemTemperature1; // FIXME dependency on mw.c
 
 #define ID_VERT_SPEED         0x30 //opentx vario
 
+#define ID_PROFILE_ID         0x64 //100 decimal
+#define ID_PID_CONTROLLER_ID  0x65 //101 decimal
+#define ID_PITCH_P            0x66 //102 decimal
+#define ID_PITCH_I            0x67 //103 decimal
+#define ID_PITCH_D            0x68 //104 decimal
+
 #define GPS_BAD_QUALITY       300
 #define GPS_MAX_HDOP_VAL      9999
 #define DELAY_FOR_BARO_INITIALISATION (5 * 1000) //5s
@@ -158,6 +163,22 @@ static void serialize16(int16_t a)
     serializeFrsky(t);
     t = a >> 8 & 0xff;
     serializeFrsky(t);
+}
+
+static void sendPIDInfo(uint8_t currentProfileIndex, pidProfile_t *currentPIDProfile)
+{
+	sendDataHead(ID_PROFILE_ID);
+	serialize16(currentProfileIndex);
+
+	sendDataHead(ID_PID_CONTROLLER_ID);
+	serialize16(currentPIDProfile->pidController);
+
+	sendDataHead(ID_PITCH_P);
+	serialize16(currentPIDProfile->pidController == 2 ? (uint8_t)(currentPIDProfile->P_f[PITCH]*10) : currentPIDProfile->P8[PITCH]);
+	sendDataHead(ID_PITCH_I);
+	serialize16(currentPIDProfile->pidController == 2 ? (uint8_t)(currentPIDProfile->I_f[PITCH]*100) : currentPIDProfile->I8[PITCH]);
+	sendDataHead(ID_PITCH_D);
+	serialize16(currentPIDProfile->pidController == 2 ? (uint8_t)(currentPIDProfile->D_f[PITCH]*1000) : currentPIDProfile->D8[PITCH]);
 }
 
 static void sendAccel(void)
@@ -484,7 +505,7 @@ void checkFrSkyTelemetryState(void)
         freeFrSkyTelemetryPort();
 }
 
-void handleFrSkyTelemetry(rxConfig_t *rxConfig, uint16_t deadband3d_throttle)
+void handleFrSkyTelemetry(rxConfig_t *rxConfig, uint8_t currentProfileIndex, pidProfile_t *currentPIDProfile, uint16_t deadband3d_throttle)
 {
     if (!frskyTelemetryEnabled) {
         return;
@@ -537,6 +558,8 @@ void handleFrSkyTelemetry(rxConfig_t *rxConfig, uint16_t deadband3d_throttle)
 #else
         sendFakeLatLongThatAllowsHeadingDisplay();
 #endif
+
+		sendPIDInfo(currentProfileIndex, currentPIDProfile);
 
         sendTelemetryTail();
     }

@@ -20,6 +20,7 @@
 #include <stdlib.h>
 
 #include "platform.h"
+#include "common/axis.h"
 
 #ifdef TELEMETRY
 
@@ -31,6 +32,8 @@
 
 #include "rx/rx.h"
 #include "io/rc_controls.h"
+
+#include "flight/pid.h"
 
 #include "config/runtime_config.h"
 #include "config/config.h"
@@ -80,9 +83,9 @@ void checkTelemetryState(void)
     checkSmartPortTelemetryState();
 }
 
-void handleTelemetry(rxConfig_t *rxConfig, uint16_t deadband3d_throttle)
+void handleTelemetry(rxConfig_t *rxConfig, uint8_t currentProfileIndex, pidProfile_t *currentPIDProfile, uint16_t deadband3d_throttle)
 {
-    handleFrSkyTelemetry(rxConfig, deadband3d_throttle);
+    handleFrSkyTelemetry(rxConfig, currentProfileIndex, currentPIDProfile, deadband3d_throttle);
     handleHoTTTelemetry();
     handleMSPTelemetry();
     handleSmartPortTelemetry();

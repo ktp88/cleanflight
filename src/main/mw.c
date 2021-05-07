@@ -816,7 +816,7 @@ void loop(void)
 
 #ifdef TELEMETRY
     if (!cliMode && feature(FEATURE_TELEMETRY)) {
-        handleTelemetry(&masterConfig.rxConfig, masterConfig.flight3DConfig.deadband3d_throttle);
+        handleTelemetry(&masterConfig.rxConfig, masterConfig.current_profile_index, &currentProfile->pidProfile, masterConfig.flight3DConfig.deadband3d_throttle);
     }
 #endif
 

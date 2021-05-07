@@ -16,6 +16,8 @@
  */
 
 #include "rx/rx.h"
+#include "common/axis.h"
+#include "flight/pid.h"
 
 #ifndef TELEMETRY_FRSKY_H_
 #define TELEMETRY_FRSKY_H_
@@ -25,7 +27,7 @@ typedef enum {
     FRSKY_VFAS_PRECISION_HIGH
 } frskyVFasPrecision_e;
 
-void handleFrSkyTelemetry(rxConfig_t *rxConfig, uint16_t deadband3d_throttle);
+void handleFrSkyTelemetry(rxConfig_t *rxConfig, uint8_t currentProfileIndex, pidProfile_t *currentPIDProfile, uint16_t deadband3d_throttle);
 void checkFrSkyTelemetryState(void);
 
 void initFrSkyTelemetry(telemetryConfig_t *telemetryConfig);

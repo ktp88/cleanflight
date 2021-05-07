@@ -22,6 +22,8 @@
  *      Author: Hydra
  */
 #include "rx/rx.h"
+#include "common/axis.h"
+#include "flight/pid.h"
 
 #ifndef TELEMETRY_COMMON_H_
 #define TELEMETRY_COMMON_H_
@@ -48,7 +50,7 @@ typedef struct telemetryConfig_s {
 } telemetryConfig_t;
 
 void checkTelemetryState(void);
-void handleTelemetry(rxConfig_t *rxConfig, uint16_t deadband3d_throttle);
+void handleTelemetry(rxConfig_t *rxConfig, uint8_t currentProfileIndex, pidProfile_t *currentPIDProfile, uint16_t deadband3d_throttle);
 
 bool determineNewTelemetryEnabledState(portSharing_e portSharing);
 
