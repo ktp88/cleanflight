@@ -1,22 +1,22 @@
 /*
- * This file is part of Cleanflight and Betaflight.
- *
- * Cleanflight and Betaflight are free software. You can redistribute
- * this software and/or modify this software under the terms of the
- * GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option)
- * any later version.
- *
- * Cleanflight and Betaflight are distributed in the hope that they
- * will be useful, but WITHOUT ANY WARRANTY; without even the implied
- * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this software.
- *
- * If not, see <http://www.gnu.org/licenses/>.
- */
+* This file is part of Cleanflight and Betaflight.
+*
+* Cleanflight and Betaflight are free software. You can redistribute
+* this software and/or modify this software under the terms of the
+* GNU General Public License as published by the Free Software
+* Foundation, either version 3 of the License, or (at your option)
+* any later version.
+*
+* Cleanflight and Betaflight are distributed in the hope that they
+* will be useful, but WITHOUT ANY WARRANTY; without even the implied
+* warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+* See the GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this software.
+*
+* If not, see <http://www.gnu.org/licenses/>.
+*/
 
 #pragma once
 
@@ -102,13 +102,13 @@
 //#define ACC_BMA280_ALIGN        CW0_DEG
 #define ACC_MPU6500_ALIGN       CW0_DEG
 
-#define USE_BARO
-#define USE_BARO_MS5611 // needed for Flip32 board
-#define USE_BARO_BMP280
+//#define USE_BARO
+//#define USE_BARO_MS5611 // needed for Flip32 board
+//#define USE_BARO_BMP280
 
-#define USE_MAG
-#define USE_MAG_HMC5883
-#define MAG_HMC5883_ALIGN       CW180_DEG
+//#define USE_MAG
+//#define USE_MAG_HMC5883
+//#define MAG_HMC5883_ALIGN       CW180_DEG
 
 //#define USE_RANGEFINDER
 //#define USE_RANGEFINDER_HCSR04
@@ -159,8 +159,8 @@
 #define USED_TIMERS             ( TIM_N(1) | TIM_N(2) | TIM_N(3) | TIM_N(4) )
 
 #undef USE_PWM
-#undef USE_SERIAL_RX
-#undef USE_SERIALRX_CRSF       // Team Black Sheep Crossfire protocol
+//#undef USE_SERIAL_RX
+//#undef USE_SERIALRX_CRSF       // Team Black Sheep Crossfire protocol
 #undef USE_SERIALRX_IBUS       // FlySky and Turnigy receivers
 #undef USE_SERIALRX_SBUS       // Frsky and Futaba receivers
 #undef USE_SERIALRX_SPEKTRUM   // SRXL, DSM2 and DSMX protocol
